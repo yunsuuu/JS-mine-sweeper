@@ -224,10 +224,9 @@ function onLeftClick(e) {
 }
 
  // 지뢰심기
- function plantMine() {
-  // map 메서드는 배열을 1:
-  // 0-99까지 숫자가 담긴 배열 1로 짝지음
-  // index와 짝지으니까 0-99까지 
+ function plantMine() { 
+  // map 메서드 = 0-99까지 숫자가 담긴 배열 1:1로 짝지음
+  // index와 짝지으니까 0-99까지
   const candidate = Array(row * cell).fill().map((arr, i) => { 
     return i;
   });
