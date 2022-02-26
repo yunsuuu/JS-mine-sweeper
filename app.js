@@ -1,5 +1,5 @@
 // 이차원배열에선 몇번째 줄, 몇번째 칸을 클릭했는데 index 알아내는 것이 핵심!
-// false 를 반환하는 것: 문자열, 빈 문자열, 0, false, null, undefined, NaN
+// false 를 반환하는 것: 문자열, 빈 문자열, 0, null, undefined, NaN
 
 const $form = document.querySelector("#form");
 const $timer = document.querySelector("#timer");
@@ -52,7 +52,7 @@ function countMine(rowIndex, cellIndex){
   // 자기자신을 기준으로 상하좌우로 둘러싸인 숫자 8개 표시
   // data[0][0] = 5 라고 가정
   // 테이블 첫줄, 첫칸 5를 기준으로 주변 숫자 위치 파악
-  // && 앞 값이 존재하면 i++ 실행(존재하지 않으면 i++ 실행x)
+  // && 앞 값이 존재하면 i++ 실행(존재하지 않으면 실행x)
   // ?. (optional chaining) = ?. 앞의 평가 대상이 undefined나 null이면 평가를 멈추고 undefined를 반환(에러를 방지)
   mines.includes(data[rowIndex - 1]?.[cellIndex - 1]) && i++; // 1
   mines.includes(data[rowIndex - 1]?.[cellIndex]) && i++; // 2
@@ -74,7 +74,7 @@ function open(rowIndex, cellIndex) {
   // data[rowIndex][cellIndex] >= CODE.OPENED -> 0보다 크거나 같다 = 열린 적이 있다
   if(data[rowIndex]?.[cellIndex] >= CODE.OPENED) return; // 한번 열었으면 함수 종료
   const target = $tbody.children[rowIndex]?.children[cellIndex];
-  // $tbody.children(<tr>.children(<td>))
+  // $tbody.children(<tr>).children(<td>)
   if(!target){
     return; // 해당되는 태그가 없으면 종료
   }
@@ -128,7 +128,7 @@ function transferMine(rI, cI) {
   // undefined가 반환되는 경우 (undefined를 막기 위해 위의 경우 return으로 종료)
   if(searched[rI][cI]) return; // 이미 찾은 칸이면 종료
   if(data[rI][cI] === CODE.NORMAL){ // 클릭한 칸이 빈칸이면
-    nomalCellFound = true;
+    normalCellFound = true;
     data[rI][cI] = CODE.MINE; // 그 칸에 지뢰 심기
   } else { // 아닐 경우 주변 8칸 탐색
     searched[rI][cI] = true; // 이미 찾은 칸이면 return으로 종료
